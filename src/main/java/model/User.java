@@ -8,8 +8,6 @@ public class User {
     private String username;
     private String firstName;
 
-    // Конструктор, геттеры, сеттеры, equals/hashCode, toString...
-
     public User() {
     }
 
