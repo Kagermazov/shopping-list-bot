@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.ShoppingListRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,7 +73,20 @@ class InMemoryShoppingListRepositoryTest {
 
     @Test
     void shouldReturnAllListsByUserId() {
+        ShoppingList firstShoppingList = new ShoppingList();
+        firstShoppingList.setOwnerId(1L);
+        shoppingListRepository.save(firstShoppingList);
 
+        ShoppingList secondShoppingList = new ShoppingList();
+        secondShoppingList.setOwnerId(1L);
+        shoppingListRepository.save(secondShoppingList);
+
+        assertInstanceOf(List.class, shoppingListRepository.findAllByOwnerId(1L));
+        ShoppingList firstExtractedShoppingList = shoppingListRepository.findAllByOwnerId(1L).get(0);
+        ShoppingList secondExtractedShoppingList = shoppingListRepository.findAllByOwnerId(1L).get(1);
+
+        assertEquals(1L, firstExtractedShoppingList.getId());
+        assertEquals(2L, secondExtractedShoppingList.getId());
     }
 
     @Test
