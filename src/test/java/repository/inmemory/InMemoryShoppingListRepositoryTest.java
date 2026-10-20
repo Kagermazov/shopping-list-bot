@@ -64,7 +64,10 @@ class InMemoryShoppingListRepositoryTest {
 
     @Test
     void shouldReturnEmptyOptionalWhenShoppingListDoesNotExist() {
+        ShoppingList myShoppingList = new ShoppingList();
+        myShoppingList.setId(1L);
 
+        assertTrue(shoppingListRepository.findById(myShoppingList.getId()).isEmpty());
     }
 
     @Test
