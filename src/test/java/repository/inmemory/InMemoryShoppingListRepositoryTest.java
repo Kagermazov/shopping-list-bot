@@ -50,7 +50,16 @@ class InMemoryShoppingListRepositoryTest {
 
     @Test
     void shouldReturnShoppingListWhenShoppingListExists() {
+        ShoppingList firstShoppingList = new ShoppingList();
+        firstShoppingList.setId(1L);
+        shoppingListRepository.save(firstShoppingList);
 
+        ShoppingList secondShoppingList = new ShoppingList();
+        secondShoppingList.setId(1L);
+        shoppingListRepository.save(secondShoppingList);
+
+        assertTrue(shoppingListRepository.findById(1L).isPresent());
+        assertEquals(firstShoppingList, shoppingListRepository.findById(1L).get());
     }
 
     @Test
