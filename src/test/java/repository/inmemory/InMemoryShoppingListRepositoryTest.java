@@ -96,7 +96,7 @@ class InMemoryShoppingListRepositoryTest {
 
     @Test
     void shouldReturnEmptyListWhenUserHasNoShoppingLists() {
-
+        assertTrue(shoppingListRepository.findAllByOwnerId(1L).isEmpty());
     }
 
     @Test
