@@ -5,6 +5,7 @@ import java.util.Objects;
 public class User {
     private Long id;
     private Long chatId;
+    private Long telegramId;
     private String username;
     private String firstName;
 
@@ -71,5 +72,13 @@ public class User {
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 '}';
+    }
+
+    public Long getTelegramId() {
+        return telegramId;
+    }
+
+    public void setTelegramId(Long telegramId) {
+        this.telegramId = telegramId;
     }
 }

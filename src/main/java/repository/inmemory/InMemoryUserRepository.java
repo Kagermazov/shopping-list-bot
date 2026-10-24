@@ -8,12 +8,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class InMemoryUserRepository implements UserRepository {
     private final Map<Long, User> repository = new ConcurrentHashMap<>();
+    private final AtomicLong idGenerator = new AtomicLong(1);
 
     @Override
     public User save(User newUser) {
+        if (newUser.getId() == null) {
+            newUser.setId(idGenerator.incrementAndGet());
+        }
         repository.put(newUser.getId(), newUser);
         return newUser;
     }
@@ -31,5 +36,12 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public boolean deleteById(Long id) {
         return repository.remove(id) != null;
+    }
+
+    @Override
+    public Optional<User> findByTelegramId(Long telegramId) {
+        return repository.values().stream()
+                .filter(user -> user.getTelegramId().equals(telegramId))
+                .findFirst();
     }
 }

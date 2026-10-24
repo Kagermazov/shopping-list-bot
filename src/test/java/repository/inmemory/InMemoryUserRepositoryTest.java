@@ -105,4 +105,23 @@ class InMemoryUserRepositoryTest {
         boolean isDeleted = userRepository.deleteById(999L);
         assertFalse(isDeleted);
     }
+
+    @Test
+    void shouldFindUserByTelegramId() {
+        User user = new User();
+        user.setTelegramId(123456789L);
+        user.setUsername("test_user");
+        userRepository.save(user);
+
+        Optional<User> found = userRepository.findByTelegramId(123456789L);
+
+        assertTrue(found.isPresent());
+        assertEquals("test_user", found.get().getUsername());
+    }
+
+    @Test
+    void shouldReturnEmptyOptionalWhenTelegramIdNotFound() {
+        Optional<User> found = userRepository.findByTelegramId(999L);
+        assertTrue(found.isEmpty());
+    }
 }
