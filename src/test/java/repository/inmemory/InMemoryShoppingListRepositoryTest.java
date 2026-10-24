@@ -91,7 +91,7 @@ class InMemoryShoppingListRepositoryTest {
 
     @Test
     void shouldReturnEmptyListWhenRepositoryIsEmpty() {
-
+        assertTrue(shoppingListRepository.findById(1L).isEmpty());
     }
 
     @Test
