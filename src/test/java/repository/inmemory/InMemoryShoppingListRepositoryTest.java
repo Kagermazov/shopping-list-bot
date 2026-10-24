@@ -1,8 +1,6 @@
 package repository.inmemory;
 
-import model.ShoppingItem;
 import model.ShoppingList;
-import model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.ShoppingListRepository;
@@ -46,7 +44,7 @@ class InMemoryShoppingListRepositoryTest {
 
         assertTrue(shoppingListRepository.findById(secondShoppingList.getId()).isPresent());
         assertEquals(shoppingListRepository.findById(secondShoppingList.getId()).get().getId(), newShoppingList.getId());
-        assertEquals(shoppingListRepository.findById(secondShoppingList.getId()).get().getTitle(), "Title");
+        assertEquals("Title", shoppingListRepository.findById(secondShoppingList.getId()).get().getTitle());
     }
 
     @Test
