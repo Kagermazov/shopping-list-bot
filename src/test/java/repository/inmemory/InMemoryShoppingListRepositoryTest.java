@@ -101,11 +101,19 @@ class InMemoryShoppingListRepositoryTest {
 
     @Test
     void shouldReturnTrueAndRemoveShoppingListWhenShoppingListExists() {
+        ShoppingList firstShoppingList = new ShoppingList();
+        firstShoppingList.setOwnerId(1L);
+        shoppingListRepository.save(firstShoppingList);
 
+        ShoppingList secondShoppingList = new ShoppingList();
+        secondShoppingList.setOwnerId(1L);
+
+        assertTrue(shoppingListRepository.deleteById(1L));
+        assertFalse(shoppingListRepository.findById(1L).isPresent());
     }
 
     @Test
     void shouldReturnFalseWhenDeleteNonExistentShoppingList() {
-
+        assertFalse(shoppingListRepository.deleteById(1L));
     }
 }
